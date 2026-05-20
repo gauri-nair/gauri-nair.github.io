@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f3ee;
+      --bg-card: #ffffff;
+      --text: #1a1a18;
+      --text-muted: #6b6b62;
+      --accent: #2d5a3d;
+      --accent-light: #e8f0ea;
+      --border: rgba(0,0,0,0.09);
+      --tag-bg: #eff4f0;
+      --tag-text: #2d5a3d;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 0 1rem;
+    }
+
+    /* ── NAV ── */
+    nav {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 0 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 5rem 0 4rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+    }
+    .hero-text h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+      color: var(--text);
+    }
+    .hero-text h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-text p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin-bottom: 1.75rem;
+    }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border: 1px solid rgba(45,90,61,0.18);
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+    }
+    .avatar {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      border: 3px solid rgba(45,90,61,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.5rem;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── SECTION ── */
+    section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    /* ── PROJECT CARDS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+    }
+    .card-emoji { font-size: 1.75rem; }
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .card p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.25rem; }
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+    }
+    .card-links { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+    .card-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: opacity 0.2s;
+    }
+    .card-links a:hover { opacity: 0.7; }
+    .card-links a::after { content: ' →'; }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .about-text { font-size: 0.975rem; line-height: 1.8; color: var(--text-muted); }
+    .about-text p + p { margin-top: 1rem; }
+    .skills-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .skill-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.875rem;
+    }
+    .skill-name { color: var(--text); font-weight: 500; }
+    .skill-bar-bg {
+      flex: 1;
+      height: 4px;
+      background: var(--border);
+      border-radius: 100px;
+      margin: 0 1rem;
+      overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 100px;
+    }
+    .skill-pct { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--text-muted); }
+
+    /* ── CONTACT ── */
+    .contact-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .contact-link:hover {
+      background: var(--accent-light);
+      border-color: rgba(45,90,61,0.25);
+      color: var(--accent);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 0 3rem;
+      border-top: 1px solid var(--border);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 600px) {
+      .hero { grid-template-columns: 1fr; }
+      .avatar { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a class="nav-logo" href="#">Your Name</a>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <header class="hero">
+    <div class="hero-text">
+      <h1>Data scientist.<br><em>Problem solver.</em><br>Curious builder.</h1>
+      <p>
+        Hi, I'm <strong>Your Name</strong> — I turn messy data into clear insights
+        and build things that (hopefully) work. Currently studying/working at <strong>Your School / Company</strong>.
+      </p>
+      <div class="hero-badges">
+        <span class="badge">Python</span>
+        <span class="badge">Machine Learning</span>
+        <span class="badge">Data Visualization</span>
+        <span class="badge">UI/UX</span>
+      </div>
+    </div>
+    <!-- Change initials below to match your name -->
+    <div class="avatar">YN</div>
+  </header>
+
+  <!-- ── PROJECTS ── -->
+  <section id="projects">
+    <p class="section-label">// Projects</p>
+    <div class="projects-grid">
+
+      <!-- PROJECT 1 — edit this block -->
+      <div class="card">
+        <div class="card-emoji">🧠</div>
+        <h3>Sentiment Analysis on Movie Reviews</h3>
+        <p>Built an NLP model that classifies IMDb reviews as positive or negative with 91% accuracy using logistic regression and TF-IDF.</p>
+        <div class="card-tags">
+          <span class="tag">Python</span>
+          <span class="tag">scikit-learn</span>
+          <span class="tag">NLP</span>
+        </div>
+        <div class="card-links">
+          <a href="#">GitHub</a>
+          <a href="#">Write-up</a>
+        </div>
+      </div>
+
+      <!-- PROJECT 2 — edit this block -->
+      <div class="card">
+        <div class="card-emoji">📊</div>
+        <h3>COVID-19 Trends Dashboard</h3>
+        <p>Interactive dashboard visualizing case and vaccination trends across US counties. Built with Pandas and Plotly.</p>
+        <div class="card-tags">
+          <span class="tag">Pandas</span>
+          <span class="tag">Plotly</span>
+          <span class="tag">Data Viz</span>
+        </div>
+        <div class="card-links">
+          <a href="#">GitHub</a>
+          <a href="#">Live Demo</a>
+        </div>
+      </div>
+
+      <!-- PROJECT 3 — edit this block -->
+      <div class="card">
+        <div class="card-emoji">🎨</div>
+        <h3>Recipe App — UI/UX Case Study</h3>
+        <p>End-to-end design for a meal planning app: user research, wireframes, and a high-fidelity Figma prototype.</p>
+        <div class="card-tags">
+          <span class="tag">Figma</span>
+          <span class="tag">UI/UX</span>
+          <span class="tag">User Research</span>
+        </div>
+        <div class="card-links">
+          <a href="#">Figma</a>
+          <a href="#">Case Study</a>
+        </div>
+      </div>
+
+      <!-- ADD MORE PROJECTS by copying a card block above -->
+
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section id="about">
+    <p class="section-label">// About me</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a [student / recent grad / data professional] passionate about
+          using data to understand the world a little better. I'm drawn to projects
+          that sit at the intersection of technical rigor and clear communication.
+        </p>
+        <p>
+          Outside of data stuff, I enjoy [your hobbies here]. Always open to
+          collaborating on interesting projects — feel free to reach out!
+        </p>
+      </div>
+      <div class="skills-list">
+        <!-- Change the width % to reflect your actual comfort level -->
+        <div class="skill-row">
+          <span class="skill-name">Python</span>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%"></div></div>
+          <span class="skill-pct">80%</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">SQL</span>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:65%"></div></div>
+          <span class="skill-pct">65%</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">Machine Learning</span>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:60%"></div></div>
+          <span class="skill-pct">60%</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">Data Visualization</span>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:70%"></div></div>
+          <span class="skill-pct">70%</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">Figma / UI Design</span>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:50%"></div></div>
+          <span class="skill-pct">50%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact">
+    <p class="section-label">// Get in touch</p>
+    <div class="contact-row">
+      <a class="contact-link" href="mailto:you@email.com">✉ Email me</a>
+      <a class="contact-link" href="https://github.com/yourusername" target="_blank">⌥ GitHub</a>
+      <a class="contact-link" href="https://linkedin.com/in/yourprofile" target="_blank">in LinkedIn</a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <span>© 2025 Your Name</span>
+    <span>built with html + ☕</span>
+  </footer>
+
+</body>
+</html>
