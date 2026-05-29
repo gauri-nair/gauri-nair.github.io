@@ -1,403 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gauri Nair — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gauri Nair | Data Portfolio</title>
+    <meta
+      name="description"
+      content="Physics-trained data analyst portfolio with projects in F1 analytics, TV product design, music taste analysis, and applied data storytelling."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="Gauri Nair home">GN</a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="./index.html" aria-current="page">Home</a>
+        <a href="./project-f1.html">F1</a>
+        <a href="./project-tv.html">TV App</a>
+        <a href="./project-music.html">Music</a>
+        <a href="./resume.html">Resume</a>
+      </nav>
+    </header>
 
-    :root {
-      --bg: #f5f3ee;
-      --bg-card: #ffffff;
-      --text: #1a1a18;
-      --text-muted: #6b6b62;
-      --accent: #2d5a3d;
-      --accent-light: #e8f0ea;
-      --border: rgba(0,0,0,0.09);
-      --tag-bg: #eff4f0;
-      --tag-text: #2d5a3d;
-    }
+    <main>
+      <section class="home-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Physics major · CS + data science minors</p>
+          <h1>Hi, I’m Gauri. I build data projects around F1, TV, and music.</h1>
+          <p class="lede">
+            I’m a rising senior interested in data analyst and data science roles after
+            graduation. My portfolio connects physics-trained problem solving with
+            projects in sports analytics, product data, and visual storytelling.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#projects">View projects</a>
+            <a class="button secondary" href="./resume.html">Resume</a>
+          </div>
+        </div>
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      padding: 0 1rem;
-    }
+        <aside class="hero-board" aria-label="Portfolio preview">
+          <div class="board-top">
+            <span>Now building</span>
+            <strong>Project 01</strong>
+          </div>
+          <div class="feature-preview">
+            <div class="preview-orbit" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div>
+              <p class="preview-kicker">F1 Race Strategy Dashboard</p>
+              <h2>Turning lap times into a strategy story.</h2>
+            </div>
+          </div>
+          <div class="board-row">
+            <span>Question</span>
+            <strong>What changed the race?</strong>
+          </div>
+          <div class="board-row">
+            <span>Methods</span>
+            <strong>Python · SQL · Plotly</strong>
+          </div>
+          <div class="board-row">
+            <span>Output</span>
+            <strong>Dashboard + writeup</strong>
+          </div>
+        </aside>
+      </section>
 
-    /* ── NAV ── */
-    nav {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 2rem 0 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.2rem;
-      color: var(--text);
-      text-decoration: none;
-    }
-    .nav-links { display: flex; gap: 1.5rem; }
-    .nav-links a {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent); }
+      <section class="section about-section">
+        <p class="eyebrow">About</p>
+        <div class="split">
+          <h2>Quantitative background, applied to human questions.</h2>
+          <div class="body-copy">
+            <p>
+              Physics taught me how to model systems, test assumptions, and work with
+              uncertainty. Data science gives me the tools to apply that thinking to
+              questions people actually care about.
+            </p>
+            <p>
+              This site is meant to show both sides: the technical work behind each
+              project and the plain-English story a hiring manager can understand quickly.
+            </p>
+          </div>
+        </div>
+      </section>
 
-    /* ── HERO ── */
-    .hero {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 5rem 0 4rem;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 2rem;
-      align-items: center;
-    }
-    .hero-text h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.4rem, 6vw, 4rem);
-      line-height: 1.1;
-      margin-bottom: 1.25rem;
-      color: var(--text);
-    }
-    .hero-text h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-    .hero-text p {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: var(--text-muted);
-      max-width: 480px;
-      margin-bottom: 1.75rem;
-    }
-    .hero-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .badge {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      background: var(--tag-bg);
-      color: var(--tag-text);
-      border: 1px solid rgba(45,90,61,0.18);
-      padding: 0.3rem 0.75rem;
-      border-radius: 100px;
-    }
-    .avatar {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: var(--accent-light);
-      border: 3px solid rgba(45,90,61,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'DM Serif Display', serif;
-      font-size: 2.5rem;
-      color: var(--accent);
-      flex-shrink: 0;
-    }
+      <section class="section" id="projects">
+        <div class="section-heading">
+          <p class="eyebrow">Selected projects</p>
+          <h2>Three project pages, each with a clear case study.</h2>
+        </div>
 
-    /* ── SECTION ── */
-    section {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 3rem 0;
-      border-top: 1px solid var(--border);
-    }
-    .section-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 2rem;
-    }
+        <div class="project-grid">
+          <a class="project-card f1-card" href="./project-f1.html">
+            <span class="card-label">Project 01</span>
+            <h3>F1 Race Strategy Dashboard</h3>
+            <p>
+              An interactive dashboard analyzing race pace, pit timing, tire strategy,
+              and constructor performance.
+            </p>
+            <span class="card-link">Open case study</span>
+          </a>
 
-    /* ── PROJECT CARDS ── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1rem;
-    }
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.07);
-    }
-    .card-emoji { font-size: 1.75rem; }
-    .card h3 {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--text);
-      line-height: 1.3;
-    }
-    .card p {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      flex: 1;
-    }
-    .card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.25rem; }
-    .tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      background: var(--tag-bg);
-      color: var(--tag-text);
-      padding: 0.2rem 0.55rem;
-      border-radius: 6px;
-    }
-    .card-links { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
-    .card-links a {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--accent);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      transition: opacity 0.2s;
-    }
-    .card-links a:hover { opacity: 0.7; }
-    .card-links a::after { content: ' →'; }
+          <a class="project-card tv-card" href="./project-tv.html">
+            <span class="card-label">Project 02</span>
+            <h3>Watchlist Product Lab</h3>
+            <p>
+              A Letterboxd-inspired TV tracking app with ratings, season logs, social
+              activity, and recommendation analytics.
+            </p>
+            <span class="card-link">Open case study</span>
+          </a>
 
-    /* ── ABOUT ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-    .about-text { font-size: 0.975rem; line-height: 1.8; color: var(--text-muted); }
-    .about-text p + p { margin-top: 1rem; }
-    .skills-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-    .skill-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.875rem;
-    }
-    .skill-name { color: var(--text); font-weight: 500; }
-    .skill-bar-bg {
-      flex: 1;
-      height: 4px;
-      background: var(--border);
-      border-radius: 100px;
-      margin: 0 1rem;
-      overflow: hidden;
-    }
-    .skill-bar-fill {
-      height: 100%;
-      background: var(--accent);
-      border-radius: 100px;
-    }
-    .skill-pct { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--text-muted); }
+          <a class="project-card music-card" href="./project-music.html">
+            <span class="card-label">Project 03</span>
+            <h3>Music Taste Analyzer</h3>
+            <p>
+              A personal listening dashboard that finds patterns in artists, genres,
+              moods, repeat tracks, and how taste changes over time.
+            </p>
+            <span class="card-link">Open case study</span>
+          </a>
+        </div>
+      </section>
 
-    /* ── CONTACT ── */
-    .contact-row { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .contact-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.6rem 1.2rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--text);
-      text-decoration: none;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .contact-link:hover {
-      background: var(--accent-light);
-      border-color: rgba(45,90,61,0.25);
-      color: var(--accent);
-    }
+      <section class="section skills-section">
+        <p class="eyebrow">Toolkit</p>
+        <div class="skill-grid">
+          <div>
+            <span>Analysis</span>
+            <strong>Python, pandas, NumPy, SQL</strong>
+          </div>
+          <div>
+            <span>Visualization</span>
+            <strong>Plotly, Tableau, seaborn, dashboards</strong>
+          </div>
+          <div>
+            <span>Modeling</span>
+            <strong>Regression, classification, uncertainty</strong>
+          </div>
+          <div>
+            <span>Product</span>
+            <strong>UX thinking, metrics, user behavior</strong>
+          </div>
+        </div>
+      </section>
+    </main>
 
-    /* ── FOOTER ── */
-    footer {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 2rem 0 3rem;
-      border-top: 1px solid var(--border);
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
-    }
-
-    @media (max-width: 600px) {
-      .hero { grid-template-columns: 1fr; }
-      .avatar { display: none; }
-      .about-grid { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- ── NAV ── -->
-  <nav>
-    <a class="nav-logo" href="#">Gauri Nair</a>
-    <div class="nav-links">
-      <a href="#projects">Projects</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
-
-  <!-- ── HERO ── -->
-  <header class="hero">
-    <div class="hero-text">
-      <h1>Data Science × Machine Learning</h1>
-      <p>
-        Hi, I'm <strong>Gauri Nair</strong> — I study Data Science and Physics at the <strong> University of Illinois Urbana Champaign</strong>. I love using data science to dig deeper into things I care about!
-      </p>
-      <div class="hero-badges">
-        <span class="badge">Python</span>
-        <span class="badge">Machine Learning</span>
-        <span class="badge">Data Science</span>
+    <footer class="contact-footer" id="contact">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2>Let’s connect.</h2>
       </div>
-    </div>
-    <div class="avatar">
-      <img src="gauri_nair.JPG" alt="Gauri Nair" style="width:100%; height:100%; object-fit:cover; border-radius:50%; object-position: center top;" />
-    </div>
-  </header>
-
-  <!-- ── PROJECTS ── -->
-  <section id="projects">
-    <p class="section-label">// Projects</p>
-    <div class="projects-grid">
-
-      <!-- PROJECT 1 — edit this block -->
-      <div class="card">
-        <div class="card-emoji">🧠</div>
-        <h3>Sentiment Analysis on Movie Reviews</h3>
-        <p>Built an NLP model that classifies IMDb reviews as positive or negative with 91% accuracy using logistic regression and TF-IDF.</p>
-        <div class="card-tags">
-          <span class="tag">Python</span>
-          <span class="tag">scikit-learn</span>
-          <span class="tag">NLP</span>
-        </div>
-        <div class="card-links">
-          <a href="#">GitHub</a>
-          <a href="#">Write-up</a>
-        </div>
+      <div class="contact-links">
+        <a href="mailto:hello@example.com">Email</a>
+        <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="./resume.html">Resume</a>
       </div>
+    </footer>
 
-      <!-- PROJECT 2 — edit this block -->
-      <div class="card">
-        <div class="card-emoji">📊</div>
-        <h3>COVID-19 Trends Dashboard</h3>
-        <p>Interactive dashboard visualizing case and vaccination trends across US counties. Built with Pandas and Plotly.</p>
-        <div class="card-tags">
-          <span class="tag">Pandas</span>
-          <span class="tag">Plotly</span>
-          <span class="tag">Data Viz</span>
-        </div>
-        <div class="card-links">
-          <a href="#">GitHub</a>
-          <a href="#">Live Demo</a>
-        </div>
-      </div>
-
-      <!-- PROJECT 3 — edit this block -->
-      <div class="card">
-        <div class="card-emoji">🎨</div>
-        <h3>Recipe App — UI/UX Case Study</h3>
-        <p>End-to-end design for a meal planning app: user research, wireframes, and a high-fidelity Figma prototype.</p>
-        <div class="card-tags">
-          <span class="tag">Figma</span>
-          <span class="tag">UI/UX</span>
-          <span class="tag">User Research</span>
-        </div>
-        <div class="card-links">
-          <a href="#">Figma</a>
-          <a href="#">Case Study</a>
-        </div>
-      </div>
-
-      <!-- ADD MORE PROJECTS by copying a card block above -->
-
-    </div>
-  </section>
-
-  <!-- ── ABOUT ── -->
-  <section id="about">
-    <p class="section-label">// About me</p>
-    <div class="about-grid">
-      <div class="about-text">
-        <p>
-          I'm a student passionate about
-          using data to understand the world a little better. I love digging into the data behind things people genuinely care about, like sports trends, fan behavior, and audience engagement.
-        </p>
-        <p>
-          Outside of data stuff, I enjoy binging tv shows, watching F1, crocheting, and reading! Always open to
-          collaborating on interesting projects — feel free to reach out!
-        </p>
-      </div>
-      <div class="skills-list">
-        <!-- Change the width % to reflect your actual comfort level -->
-        <div class="skill-row">
-          <span class="skill-name">Python</span>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%"></div></div>
-          <span class="skill-pct">80%</span>
-        </div>
-        <div class="skill-row">
-          <span class="skill-name">SQL</span>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:65%"></div></div>
-          <span class="skill-pct">65%</span>
-        </div>
-        <div class="skill-row">
-          <span class="skill-name">Machine Learning</span>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:60%"></div></div>
-          <span class="skill-pct">60%</span>
-        </div>
-        <div class="skill-row">
-          <span class="skill-name">Data Science</span>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:70%"></div></div>
-          <span class="skill-pct">70%</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── CONTACT ── -->
-  <section id="contact">
-    <p class="section-label">// Get in touch</p>
-    <div class="contact-row">
-      <a class="contact-link" href="mailto:gauri.j.nair@email.com">✉ Email me</a>
-      <a class="contact-link" href="https://github.com/gauri-nair" target="_blank">⌥ GitHub</a>
-      <a class="contact-link" href="https://linkedin.com/in/gaurinair18" target="_blank">in LinkedIn</a>
-    </div>
-  </section>
-
-  <!-- ── FOOTER ── -->
-  <footer>
-    <span>© 2026 Gauri Nair</span>
-    <span>built with html + ☕</span>
-  </footer>
-
-</body>
+    <script src="./script.js"></script>
+  </body>
 </html>
