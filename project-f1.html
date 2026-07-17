@@ -56,8 +56,8 @@
       }
 
       details {
-        background: rgba(0, 0, 0, 0.3); 
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: #fafafa; 
+        border: 1px solid #e1e1e1;
         border-radius: 8px;
         padding: 15px;
         margin-top: 20px;
@@ -65,7 +65,7 @@
 
       summary {
         font-family: 'Space Grotesk', sans-serif;
-        color: #66fcf1; 
+        color: var(--accent, #ff4081);
         font-weight: 600;
         cursor: pointer;
         user-select: none;
@@ -73,7 +73,7 @@
       }
 
       summary:hover {
-        color: #ffffff; /* Bright text accent on hover */
+        filter: brightness(0.8); /* Darkens the pink slightly when hovered */
       }
 
       pre, pre code {
@@ -81,7 +81,7 @@
         overflow-x: auto;
         font-family: monospace;
         font-size: 0.9rem;
-        color: #e0e6ed; 
+        color: #222222; /* Crisp dark gray text for high visibility */
         line-height: 1.5;
         text-align: left;
         display: block;
