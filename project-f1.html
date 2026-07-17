@@ -3,11 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>F1 Race Strategy Dashboard | Gauri Nair</title>
-    <meta
-      name="description"
-      content="Case study page for an F1 analytics dashboard focused on race strategy, pace, pit timing, and performance data."
-    />
+    <title>F1 Telemetry Dashboard | Gauri Nair</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,6 +11,76 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <style>
+      /* Page-specific overrides matching your dark theme variables */
+      .case-study-grid {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        gap: 40px;
+        margin: 40px 0;
+      }
+      
+      @media (max-width: 900px) {
+        .case-study-grid { grid-template-columns: 1fr; }
+      }
+
+      .dashboard-wrapper {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        height: 0;
+        overflow: hidden;
+        border-radius: 12px;
+        background: #111;
+        margin: 20px 0;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      }
+
+      .dashboard-wrapper iframe {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        border: none;
+      }
+
+      .details-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 25px;
+      }
+
+      .sidebar-sticky {
+        position: sticky;
+        top: 40px;
+      }
+
+      details {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 20px;
+      }
+
+      summary {
+        font-family: 'Space Grotesk', sans-serif;
+        color: #66fcf1; /* A sleek teal accent */
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      summary:hover { color: #fff; }
+
+      pre {
+        margin: 15px 0 0 0;
+        overflow-x: auto;
+        font-family: monospace;
+        font-size: 0.9rem;
+        color: #a9b7c6;
+        line-height: 1.5;
+      }
+    </style>
   </head>
   <body>
     <header class="site-header">
@@ -28,63 +94,112 @@
       </nav>
     </header>
 
-    <main>
-      <section class="case-hero f1-theme">
-        <p class="eyebrow">Project 01</p>
-        <h1>F1 Race Strategy Dashboard</h1>
-        <p class="lede">
-          A motorsport analytics project exploring whether pace, tire degradation, and
-          pit timing explain race outcomes across drivers and constructors.
+    <main class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+      <section style="margin-top: 40px;">
+        <p class="eyebrow">Project 01 · Data Science & BI</p>
+        <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.8rem; margin: 10px 0;">
+          F1 Race Telemetry & Strategy Pipeline
+        </h1>
+        <p class="lede" style="font-size: 1.2rem; max-width: 800px; opacity: 0.85;">
+          An interactive telemetry analysis system translating sub-second vehicle kinematics into visual competitive insights.
         </p>
       </section>
 
-      <section class="case-layout">
-        <aside class="case-facts">
-          <div>
-            <span>Role</span>
-            <strong>Data analyst, dashboard designer</strong>
+      <div class="case-study-grid">
+        <!-- Main Content Area -->
+        <div class="main-content">
+          <div class="details-card">
+            <h2 style="font-family: 'Space Grotesk', sans-serif; margin-top:0;">Interactive Analytics App</h2>
+            <p>Select a circuit and choose top-tier constructor drivers to visualize cornering velocity metrics alongside spatial tracking lines.</p>
+            
+            <div class="dashboard-wrapper">
+              <!-- REPLACE WITH YOUR TABLEAU LINK -->
+              <iframe src="https://public.tableau.com/views/YOUR_DASHBOARD_URL?:embed=y&:showVizHome=no"></iframe>
+            </div>
           </div>
-          <div>
-            <span>Tools</span>
-            <strong>Python, pandas, SQL, Plotly, Streamlit</strong>
-          </div>
-          <div>
-            <span>Status</span>
-            <strong>Planned summer build</strong>
-          </div>
-        </aside>
 
-        <div class="case-content">
-          <h2>Case study outline</h2>
-          <div class="case-step">
-            <h3>Question</h3>
-            <p>Which race decisions create the largest performance swing: tire choice, pit window, qualifying position, or raw pace?</p>
-          </div>
-          <div class="case-step">
-            <h3>Data</h3>
-            <p>Race results, lap times, pit stops, tire stints, weather context, and constructor/driver metadata.</p>
-          </div>
-          <div class="case-step">
-            <h3>Output</h3>
-            <p>A dashboard with driver comparisons, race timelines, strategy deltas, and a short written analysis of the clearest findings.</p>
+          <div class="details-card">
+            <h2 style="font-family: 'Space Grotesk', sans-serif;">Data Architecture</h2>
+            <p>
+              Raw asynchronous data signals sample telemetry updates at ~20Hz. To protect dashboard application rendering, a custom Python architecture maps physical vehicle metrics, handles cache limits, and downsamples spatial dimensions uniformly to a manageable 10Hz sequence.
+            </p>
+
+            <details>
+              <summary>View Data Engineering Pipeline Script</summary>
+              <pre><code>import os
+import pandas as pd
+import fastf1
+
+cache_dir = './f1_cache'
+os.makedirs(cache_dir, exist_ok=True)
+fastf1.Cache.enable_cache(cache_dir)
+
+def build_master_telemetry(year, races, drivers):
+    master_df = []
+    for race in races:
+        session = fastf1.get_session(year, race, 'Q')
+        session.load(telemetry=True, laps=True, weather=False)
+        
+        for driver in drivers:
+            driver_laps = session.laps.pick_drivers(driver)
+            if driver_laps.empty: continue
+            
+            fastest_lap = driver_laps.pick_fastest()
+            tel = fastest_lap.get_telemetry().add_distance()
+            tel = tel.iloc[::2].copy() # Downsample to 10Hz
+            
+            tel['Race'] = race
+            tel['Year'] = year
+            tel['Driver'] = driver
+            tel['Team'] = fastest_lap['Team']
+            
+            keep_cols = ['Year', 'Race', 'Distance', 'Speed', 'Throttle', 'Brake', 
+                         'RPM', 'nGear', 'X', 'Y', 'Driver', 'Team']
+            df_cleaned = tel[keep_cols].copy()
+            df_cleaned.rename(columns={'nGear': 'Gear'}, inplace=True)
+            master_df.append(df_cleaned)
+            
+    final_df = pd.concat(master_df, ignore_index=True)
+    final_df.to_csv(f"{year}_master_f1_telemetry.csv", index=False)
+    return final_df</code></pre>
+            </details>
           </div>
         </div>
-      </section>
+
+        <!-- Sidebar Documentation -->
+        <div class="sidebar-sticky">
+          <div class="details-card">
+            <h3 style="font-family: 'Space Grotesk', sans-serif; margin-top:0;">Project Specs</h3>
+            <p style="font-size:0.95rem; opacity:0.8;">
+              <strong>Data Infrastructure:</strong> FastF1 Engine API<br><br>
+              <strong>Data Science Layer:</strong> Python, Pandas, Numpy<br><br>
+              <strong>Analytics Output:</strong> Tableau Engine Systems
+            </p>
+          </div>
+          
+          <div class="details-card">
+            <h3 style="font-family: 'Space Grotesk', sans-serif; margin-top:0;">Key Skills</h3>
+            <p style="font-size:0.9rem; opacity:0.8; line-height: 1.4;">
+              • High-frequency data alignment<br><br>
+              • Spatial coordinate translation<br><br>
+              • Downsampling optimization
+            </p>
+          </div>
+        </div>
+      </div>
     </main>
 
-    <footer class="contact-footer">
+    <footer class="contact-footer" id="contact" style="margin-top: 60px;">
       <div>
         <p class="eyebrow">Contact</p>
         <h2>Let’s connect.</h2>
       </div>
       <div class="contact-links">
-        <a href="mailto:hello@example.com">Email</a>
-        <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
-        <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="mailto:gauri.j.nair@gmail.com">Email</a>
+        <a href="https://github.com/gauri-nair" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/gaurinair18/" target="_blank" rel="noreferrer">LinkedIn</a>
         <a href="./resume.html">Resume</a>
       </div>
     </footer>
-
-    <script src="./script.js"></script>
   </body>
 </html>
